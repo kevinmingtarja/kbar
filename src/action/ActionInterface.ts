@@ -9,9 +9,8 @@ export class ActionInterface {
   actions: Record<ActionId, ActionImpl> = {};
   options: ActionInterfaceOptions;
 
-  constructor(actions: Action[] = [], options: ActionInterfaceOptions = {}) {
+  constructor(options: ActionInterfaceOptions = {}) {
     this.options = options;
-    this.add(actions);
   }
 
   add(actions: Action[]) {

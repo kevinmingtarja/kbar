@@ -26,13 +26,13 @@ export function useStore(props: useStoreProps) {
 
   const actionsInterface = React.useMemo(
     () =>
-      new ActionInterface(props.actions || [], {
+      new ActionInterface({
         historyManager: optionsRef.current.enableHistory ? history : undefined,
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
-
+  console.log(actionsInterface)
   // TODO: at this point useReducer might be a better approach to managing state.
   const [state, setState] = React.useState<KBarState>({
     searchQuery: "",
