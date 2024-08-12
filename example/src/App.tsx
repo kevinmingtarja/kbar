@@ -22,7 +22,6 @@ import {
   ActionImpl,
   useKBar,
 } from "../../src";
-import useThemeActions from "./hooks/useThemeActions";
 
 const searchStyle = {
   padding: "12px 16px",
@@ -59,7 +58,7 @@ const App = () => {
   return (
     <KBarProvider
       options={{
-        enableHistory: true,
+        enableHistory: false,
       }}
     >
       <CommandBar />
@@ -90,7 +89,6 @@ const App = () => {
 
 function CommandBar() {
   useDocsActions();
-  useThemeActions();
   return (
     <KBarPortal>
       <KBarPositioner>
