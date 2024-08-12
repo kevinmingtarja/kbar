@@ -10,22 +10,9 @@ export default function Layout(props: Props) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <button>
-          <Logo />
-        </button>
-        <h1>kbar</h1>
+        <h1>Hypermode ⌘K</h1>
       </div>
       {props.children}
-      <footer style={{ marginTop: "var(--unit)" }}>
-        <a
-          href="https://twitter.com/timcchang"
-          rel="noreferrer"
-          target="_blank"
-          style={{ textDecoration: "none" }}
-        >
-          @timcchang
-        </a>
-      </footer>
     </div>
   );
 }
