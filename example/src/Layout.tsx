@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useKBar } from "../../src";
 import styles from "./Layout.module.scss";
 import Logo from "./Logo";
 
