@@ -8,11 +8,10 @@ interface Props {
 }
 
 export default function Layout(props: Props) {
-  const { query } = useKBar();
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <button onClick={query.toggle}>
+        <button>
           <Logo />
         </button>
         <h1>kbar</h1>
