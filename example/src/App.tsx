@@ -4,10 +4,7 @@ import * as React from "react";
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./Home";
-import Docs from "./Docs";
-import useDocsActions from "./hooks/useDocsActions";
 import { useAnalytics } from "./utils";
-import Blog from "./Blog";
 
 import {
   ActionId,
@@ -67,12 +64,6 @@ const App = () => {
           <Route path="/docs" exact>
             <Redirect to="/docs/overview" />
           </Route>
-          <Route path="/docs/:slug">
-            <Docs />
-          </Route>
-          <Route path="/blog">
-            <Blog />
-          </Route>
           <Route path="*">
             <Home />
           </Route>
@@ -88,7 +79,6 @@ const App = () => {
 };
 
 function CommandBar() {
-  useDocsActions();
   return (
     <KBarPortal>
       <KBarPositioner>
