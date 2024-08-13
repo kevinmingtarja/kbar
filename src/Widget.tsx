@@ -64,7 +64,7 @@ export default function Widget({apiKey, endpoint}:{apiKey: string, endpoint: str
         enableHistory: false,
       }}
     >
-      <CommandBar />
+      <CommandBar apiKey={apiKey} endpoint={endpoint} />
       <Input />
     </KBarProvider>
     )
@@ -85,21 +85,21 @@ function Input() {
     )
 }
 
-function CommandBar() {
+function CommandBar({apiKey, endpoint}:{apiKey: string, endpoint: string}) {
   return (
     <KBarPortal>
       <KBarPositioner>
         <KBarAnimator style={animatorStyle}>
           <KBarSearch style={searchStyle} />
-          <RenderResults />
+          <RenderResults apiKey={apiKey} endpoint={endpoint} />
         </KBarAnimator>
       </KBarPositioner>
     </KBarPortal>
   );
 }
 
-function RenderResults() {
-  const results = useHypermodeSearch();
+function RenderResults({apiKey, endpoint}:{apiKey: string, endpoint: string}) {
+  const results = useHypermodeSearch(endpoint, apiKey);
     console.log(results)
   return (
     <KBarResults
@@ -108,9 +108,56 @@ function RenderResults() {
         typeof item === "string" ? (
           <div style={groupNameStyle}>{item}</div>
         ) : (
-          <p>unknown</p>
+          <ResultItem
+            action={item}
+            active={active}
+          />
         )
       }
     />
   );
 }
+
+const ResultItem = (
+    {
+      action,
+      active,
+    }: {
+      action: ActionImpl;
+      active: boolean;
+    },
+  ) => {
+    return (
+      <div
+        style={{
+          padding: "12px 16px",
+          background: active ? "var(--a1)" : "transparent",
+          borderLeft: `2px solid ${
+            active ? "var(--foreground)" : "transparent"
+          }`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          cursor: "pointer",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            gap: "8px",
+            alignItems: "center",
+            fontSize: 14,
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div>
+              <span>{action.name}</span>
+            </div>
+            {action.subtitle && (
+              <span style={{ fontSize: 12 }}>{action.subtitle}</span>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }

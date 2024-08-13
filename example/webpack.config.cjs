@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require('webpack')
 const { ESBuildMinifyPlugin } = require("esbuild-loader");
 
 module.exports = {
@@ -44,4 +45,9 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+       'process.env': JSON.stringify(process.env)
+    }),
+  ]
 };
