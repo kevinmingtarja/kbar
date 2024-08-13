@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useKBar } from "./useKBar";
 import { ActionImpl } from "./action";
 import { Action, ActionStore } from "./types";
-
+import { useDebounce } from 'use-debounce';
 
 export default function useHypermodeSearch(endpoint: string, apiKey: string): (string | ActionImpl)[] {
     const {search} = useKBar((state) => ({
         search: state.searchQuery,
     }));
+    const [debouncedSearch] = useDebounce(search, 300);
     const [data, setData] = useState<(string | ActionImpl)[]>([]);
     useEffect(() => {
         if (!search) {
@@ -24,7 +25,7 @@ export default function useHypermodeSearch(endpoint: string, apiKey: string): (s
                 },
                 body: JSON.stringify({
                     query: `query SearchDocuments {
-    searchDocuments(namespaces: ["hm"], query: ${search}, numResults: 10) {
+    searchDocuments(namespaces: ["hm"], query: ${debouncedSearch}, numResults: 10) {
         status
         error
         objects {
@@ -63,6 +64,6 @@ export default function useHypermodeSearch(endpoint: string, apiKey: string): (s
             }
         }
         fn()
-    }, [search]);
+    }, [debouncedSearch]);
     return data
 }

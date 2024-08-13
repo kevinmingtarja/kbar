@@ -61,7 +61,8 @@
     "fast-equals": "^2.0.3",
     "fuse.js": "^6.6.2",
     "react-virtual": "^2.8.2",
-    "tiny-invariant": "^1.2.0"
+    "tiny-invariant": "^1.2.0",
+    "use-debounce": "^10.0.2"
   },
   "peerDependencies": {
     "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
